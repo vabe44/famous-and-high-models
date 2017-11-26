@@ -1,0 +1,69 @@
+<h1>Add Models</h1>
+
+<form id="add-model" name="add-model" method="post" action="/admin/models/new">
+
+    <label for="firstname">First Name</label>
+    <input class="text" name="firstname" type="text" />
+
+    <br><br>
+
+    <label for="lastname">Last Name</label>
+    <input class="text" name="lastname" type="text" />
+
+    <br><br>
+
+    <label for="height">Height (cm)</label>
+    <input class="text" name="height" type="text" />
+
+    <br><br>
+
+    <label for="bust">Bust</label>
+    <input class="text" name="bust" type="text" />
+
+    <br><br>
+
+    <label for="waist">Waist</label>
+    <input class="text" name="waist" type="text" />
+
+    <br><br>
+
+    <label for="hips">Hips</label>
+    <input class="text" name="Hips" type="text" />
+
+    <br><br>
+
+    <label for="dress">Dress</label>
+    <input class="text" name="Dress" type="text" />
+
+    <br><br>
+
+    <label for="shoe">Shoe</label>
+    <input class="text" name="Shoe" type="text" />
+
+    <br><br>
+
+    <label for="hair">Hair</label>
+    <input class="text" name="Hair" type="text" />
+
+    <br><br>
+
+    <label for="eyes">Eyes</label>
+    <input class="text" name="Eyes" type="text" />
+
+    <br><br>
+
+    <input class="btn" type="submit" value="Add Model" />
+</form>
+
+<p><strong>Available models:</strong></p>
+<% if(models.length) { %>
+<ul>
+    <% models.forEach(function(model){ %>
+        <li>
+            <%= model.first_name %>
+        </li>
+    <% }); %>
+</ul>
+<% }  else { %>
+No models added yet.
+<% } %>
