@@ -1,6 +1,19 @@
+<a href="/admin">
+    <button>Go Back</button>
+</a>
+
 <h1>Add Model</h1>
 
 <form id="add-model" name="add-model" method="post" action="/admin/models/new">
+
+    <label for="category">Category</label>
+    <select name="category">
+        <% categories.forEach(function(category){ %>
+            <option value="<%= category.id %>"><%= category.name %></option>
+        <% }); %>
+    </select>
+
+    <br><br>
 
     <label for="firstname">First Name</label>
     <input class="text" name="firstname" type="text" />
@@ -56,9 +69,9 @@
 </form>
 
 <p><strong>Available models:</strong></p>
-<% if(models.length) { %>
+<% if(allModels.length) { %>
 <ul>
-    <% models.forEach(function(model){ %>
+    <% allModels.forEach(function(model){ %>
         <li>
             <%= `${model.first_name} ${model.last_name}` %>
             <a href="/admin/models/<%= model.id %>/edit">

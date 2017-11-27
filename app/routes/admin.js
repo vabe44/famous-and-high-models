@@ -1,35 +1,29 @@
-var express = require('express');
-var router = express.Router();
-var middlewares = require("../middlewares");
-var models      = require("../models");
-var Promise = require("bluebird");
+const express = require('express');
+const router = express.Router();
+const mw = require("../middlewares");
+const models      = require("../models");
+const Promise = require("bluebird");
 
 /* GET admin page. */
-router.get('/', middlewares.isLoggedIn, function (req, res, next) {
+router.get('/', mw.isLoggedIn, function (req, res, next) {
     res.render('admin/index');
 });
 
 /* GET new model page. */
-router.get('/models', middlewares.isLoggedIn, function (req, res, next) {
+router.get('/models', mw.isLoggedIn, mw.asyncMiddleware(async (req, res, next) => {
 
-    models.Model
-    .findAll()
-    .then(models => {
-        res.render('admin/models/index', {
-            models
-        });
-    })
-    .catch(error => {
-        console.log("Oops, something went wrong. " + error);
+    const allModels = await models.Model.findAll();
+    const categories = await models.Category.findAll();
+    res.render('admin/models/index', {
+        allModels, categories
     });
 
-});
+}));
 
 /* POST new model page. */
-router.post('/models/new', middlewares.isLoggedIn, function (req, res, next) {
+router.post('/models/new', mw.isLoggedIn, mw.asyncMiddleware(async (req, res, next) => {
 
-    models.Model
-    .create({
+    await models.Model.create({
         first_name: req.body.firstname,
         last_name: req.body.lastname,
         height: req.body.height,
@@ -39,188 +33,122 @@ router.post('/models/new', middlewares.isLoggedIn, function (req, res, next) {
         dress: req.body.dress,
         shoe: req.body.shoe,
         hair: req.body.hair,
-        eyes: req.body.eyes
-    })
-    .then(() => {
-        res.redirect('back');
-    })
-    .catch(error => {
-        console.log("Oops, something went wrong. " + error);
+        eyes: req.body.eyes,
+        category_id: req.body.category
     });
-});
+    res.redirect('back');
+
+}));
+
 
 /* GET model edit page */
-router.get("/models/:id/edit", middlewares.isLoggedIn, function (req, res, next) {
+router.get("/models/:id/edit", mw.isLoggedIn, mw.asyncMiddleware(async (req, res, next) => {
 
-    models.Model.findById(req.params.id)
-    .then(model => {
-        res.render('admin/models/edit', {
-            model
-        });
-    })
-    .catch(error => {
-        console.log("Oops, something went wrong. " + error);
+    const model = await models.Model.findById(req.params.id);
+    const categories = await models.Category.findAll();
+    res.render('admin/models/edit', {
+        model, categories
     });
 
-});
+}));
 
 /* PUT model route */
-router.put("/models/:id", middlewares.isLoggedIn, function (req, res, next) {
+router.put("/models/:id", mw.isLoggedIn, mw.asyncMiddleware(async (req, res, next) => {
 
-    models.Model.findById(req.params.id)
-    .then(model => {
-        return model.update({
-            first_name: req.body.firstname,
-            last_name: req.body.lastname,
-            height: req.body.height,
-            bust: req.body.bust,
-            waist: req.body.waist,
-            hips: req.body.hips,
-            dress: req.body.dress,
-            shoe: req.body.shoe,
-            hair: req.body.hair,
-            eyes: req.body.eyes
-        });
-    })
-    .then(() => {
-        res.redirect('/admin/models');
-    })
-    .catch(error => {
-        console.log("Oops, something went wrong. " + error);
+    const model = await models.Model.findById(req.params.id);
+    await model.update({
+        first_name: req.body.firstname,
+        last_name: req.body.lastname,
+        height: req.body.height,
+        bust: req.body.bust,
+        waist: req.body.waist,
+        hips: req.body.hips,
+        dress: req.body.dress,
+        shoe: req.body.shoe,
+        hair: req.body.hair,
+        eyes: req.body.eyes,
+        category_id: req.body.category
     });
+    res.redirect('/admin/models');
 
-});
+}));
 
 /* DELETE model category */
-router.delete('/models/:id', middlewares.isLoggedIn, function (req, res, next) {
+router.delete('/models/:id', mw.isLoggedIn, mw.asyncMiddleware(async (req, res, next) => {
 
-    models.Model
-    .findOne({
-        where: {
-            id: req.params.id
-        }
-    })
-    .then(model => {
-        return model.destroy();
-    })
-    .then(() => {
-        res.redirect('/admin/models');
-    })
-    .catch(error => {
-        console.log("Oops, something went wrong. " + error);
-    });
+    const model = await models.Model.findById(req.params.id);
+    await model.destroy();
+    res.redirect('/admin/models');
 
-});
+}));
 
 /* GET model categories page. */
-router.get('/categories', middlewares.isLoggedIn, function (req, res, next) {
+router.get('/categories', mw.isLoggedIn, mw.asyncMiddleware(async (req, res, next) => {
 
-    models.Category
-    .findAll()
-    .then(categories => {
-        res.render('admin/categories/index', {
-            categories
-        });
-    })
-    .catch(error => {
-        console.log("Oops, something went wrong. " + error);
+    const categories = await models.Category.findAll();
+    res.render('admin/categories/index', {
+        categories
     });
 
-});
+}));
 
 /* POST model categories page. */
-router.post('/categories/new', middlewares.isLoggedIn, function (req, res, next) {
+router.post('/categories/new', mw.isLoggedIn, mw.asyncMiddleware(async (req, res, next) => {
 
-    models.Category
-    .create({ name: req.body.categoryname })
-    .then(() => {
-        res.redirect('back');
-    })
-    .catch(error => {
-        console.log("Oops, something went wrong. " + error);
-    });
-});
+    await models.Category.create({ name: req.body.categoryname });
+    res.redirect('back');
+}));
 
 /* GET model category edit page */
-router.get("/categories/:id/edit", middlewares.isLoggedIn, function (req, res, next) {
+router.get("/categories/:id/edit", mw.isLoggedIn, mw.asyncMiddleware(async (req, res, next) => {
 
-    models.Category.findById(req.params.id)
-    .then(category => {
-        res.render('admin/categories/edit', {
-            category
-        });
-    })
-    .catch(error => {
-        console.log("Oops, something went wrong. " + error);
+    const category = await models.Category.findById(req.params.id);
+    res.render('admin/categories/edit', {
+        category
     });
 
-});
+}));
 
 /* PUT model category route */
-router.put("/categories/:id", middlewares.isLoggedIn, function (req, res, next) {
+router.put("/categories/:id", mw.isLoggedIn, mw.asyncMiddleware(async (req, res, next) => {
 
-    models.Category.findById(req.params.id)
-    .then(category => {
-        category.name = req.body.categoryname;
-        return category.save();
-    })
-    .then(() => {
-        res.redirect('/admin/categories');
-    })
-    .catch(error => {
-        console.log("Oops, something went wrong. " + error);
+    const category = await models.Category.findById(req.params.id);
+    await category.update({
+        name: req.body.categoryname
     });
+    res.redirect('/admin/categories');
 
-});
+}));
 
 /* DELETE model category */
-router.delete('/categories/:id', middlewares.isLoggedIn, function (req, res, next) {
+router.delete('/categories/:id', mw.isLoggedIn, mw.asyncMiddleware(async (req, res, next) => {
 
-    models.Category
-    .findOne({
-        where: {
-            id: req.params.id
-        }
-    })
-    .then(category => {
-        return category.destroy();
-    })
-    .then(() => {
-        res.redirect('/admin/categories');
-    })
-    .catch(error => {
-        console.log("Oops, something went wrong. " + error);
-    });
+    const category = await models.Category.findById(req.params.id);
+    await category.destroy();
+    res.redirect('/admin/categories');
 
-});
+}));
 
 /* GET images page. */
-router.get('/images', middlewares.isLoggedIn, function (req, res, next) {
+router.get('/images', mw.isLoggedIn, mw.asyncMiddleware(async (req, res, next) => {
 
-    models.Image
-    .findAll()
-    .then(images => {
-        res.render('admin/images/index', {
-            images
-        });
-    })
-    .catch(error => {
-        console.log("Oops, something went wrong. " + error);
+    const images = models.Image.findAll();
+    res.render('admin/images/index', {
+        images
     });
 
-});
+}));
 
 /* POST model images page. */
-router.post('/images/new', middlewares.isLoggedIn, function (req, res, next) {
+router.post('/images/new', mw.isLoggedIn, mw.asyncMiddleware(async (req, res, next) => {
 
-    models.Image
-    .create({ name: req.body.imagename })
-    .then(() => {
-        res.redirect('back');
-    })
-    .catch(error => {
-        console.log("Oops, something went wrong. " + error);
+    await models.Image.create({
+        link: req.body.imagelink,
+        title: req.body.imagetitle,
+        model_id: req.body.modelId,
     });
-});
+    res.redirect('back');
+
+}));
 
 module.exports = router;
