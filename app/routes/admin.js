@@ -1,8 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const mw = require("../middlewares");
-const models      = require("../models");
-const Promise = require("bluebird");
+const models = require("../models");
 
 /* GET admin page. */
 router.get('/', mw.isLoggedIn, function (req, res, next) {
@@ -39,7 +38,6 @@ router.post('/models/new', mw.isLoggedIn, mw.asyncMiddleware(async (req, res, ne
     res.redirect('back');
 
 }));
-
 
 /* GET model edit page */
 router.get("/models/:id/edit", mw.isLoggedIn, mw.asyncMiddleware(async (req, res, next) => {
@@ -86,9 +84,7 @@ router.delete('/models/:id', mw.isLoggedIn, mw.asyncMiddleware(async (req, res, 
 router.get('/categories', mw.isLoggedIn, mw.asyncMiddleware(async (req, res, next) => {
 
     const categories = await models.Category.findAll();
-    res.render('admin/categories/index', {
-        categories
-    });
+    res.render('admin/categories/index', { categories });
 
 }));
 
@@ -103,9 +99,7 @@ router.post('/categories/new', mw.isLoggedIn, mw.asyncMiddleware(async (req, res
 router.get("/categories/:id/edit", mw.isLoggedIn, mw.asyncMiddleware(async (req, res, next) => {
 
     const category = await models.Category.findById(req.params.id);
-    res.render('admin/categories/edit', {
-        category
-    });
+    res.render('admin/categories/edit', { category });
 
 }));
 
@@ -113,9 +107,7 @@ router.get("/categories/:id/edit", mw.isLoggedIn, mw.asyncMiddleware(async (req,
 router.put("/categories/:id", mw.isLoggedIn, mw.asyncMiddleware(async (req, res, next) => {
 
     const category = await models.Category.findById(req.params.id);
-    await category.update({
-        name: req.body.categoryname
-    });
+    await category.update({ name: req.body.categoryname });
     res.redirect('/admin/categories');
 
 }));
@@ -133,9 +125,7 @@ router.delete('/categories/:id', mw.isLoggedIn, mw.asyncMiddleware(async (req, r
 router.get('/images', mw.isLoggedIn, mw.asyncMiddleware(async (req, res, next) => {
 
     const images = models.Image.findAll();
-    res.render('admin/images/index', {
-        images
-    });
+    res.render('admin/images/index', { images });
 
 }));
 
