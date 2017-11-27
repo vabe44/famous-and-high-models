@@ -9,7 +9,7 @@ module.exports = function (app, passport) {
 
     /* POST signup page. */
     app.post('/signup', passport.authenticate('local-signup', {
-        successRedirect: '/dashboard',
+        successRedirect: '/admin',
         failureRedirect: '/signup'
     }
     ));
@@ -21,7 +21,7 @@ module.exports = function (app, passport) {
 
     /* POST login page. */
     app.post('/login', passport.authenticate('local-signin', {
-        successRedirect: '/dashboard',
+        successRedirect: '/admin',
         failureRedirect: '/login'
     }
     ));
@@ -33,9 +33,9 @@ module.exports = function (app, passport) {
         });
     });
 
-    /* GET login page. */
-    app.get('/dashboard', middlewares.isLoggedIn, function (req, res, next) {
-        res.render('dashboard');
+    /* GET admin page. */
+    app.get('/admin', middlewares.isLoggedIn, function (req, res, next) {
+        res.render('admin/index');
     });
 
 }
