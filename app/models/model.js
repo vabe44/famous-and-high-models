@@ -42,7 +42,12 @@ module.exports = function (sequelize, Sequelize) {
 			associate: function (models) {
 				models.Model.belongsTo(models.Category);
 			}
-		}
+		},
+		getterMethods: {
+			fullName() {
+				return this.first_name + ' ' + this.last_name;
+			}
+		},
 	});
 
 }

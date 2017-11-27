@@ -124,20 +124,52 @@ router.delete('/categories/:id', mw.isLoggedIn, mw.asyncMiddleware(async (req, r
 /* GET images page. */
 router.get('/images', mw.isLoggedIn, mw.asyncMiddleware(async (req, res, next) => {
 
-    const images = m.Image.findAll();
-    res.render('admin/images/index', { images });
+    const images = await m.Image.findAll({ include: [ m.Model ] });
+    const models = await m.Model.findAll()
+    res.render('admin/images/index', { images, models });
 
 }));
 
-/* POST model images page. */
+/* POST image route. */
 router.post('/images/new', mw.isLoggedIn, mw.asyncMiddleware(async (req, res, next) => {
 
     await m.Image.create({
         link: req.body.imagelink,
         title: req.body.imagetitle,
-        model_id: req.body.modelId,
+        model_id: req.body.modelId || null,
     });
     res.redirect('back');
+
+}));
+
+/* GET model image edit page */
+router.get("/images/:id/edit", mw.isLoggedIn, mw.asyncMiddleware(async (req, res, next) => {
+
+    const image = await m.Image.findById(req.params.id);
+    const models = await m.Model.findAll()
+    res.render('admin/images/edit', { image, models });
+
+}));
+
+/* PUT model image route */
+router.put("/images/:id", mw.isLoggedIn, mw.asyncMiddleware(async (req, res, next) => {
+
+    const image = await m.Image.findById(req.params.id);
+    await image.update({
+        link: req.body.imagelink,
+        title: req.body.imagetitle,
+        model_id: req.body.modelId || null,
+    });
+    res.redirect('/admin/images');
+
+}));
+
+/* DELETE model image */
+router.delete('/images/:id', mw.isLoggedIn, mw.asyncMiddleware(async (req, res, next) => {
+
+    const image = await m.Image.findById(req.params.id);
+    await image.destroy();
+    res.redirect('/admin/images');
 
 }));
 

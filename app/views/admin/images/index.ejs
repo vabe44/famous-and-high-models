@@ -5,8 +5,21 @@
 <h1>Model Images</h1>
 
 <form id="add-model-image" name="add-model-image" method="post" action="/admin/images/new">
-    <label for="imagename">New Image</label>
-    <input class="text" name="imagename" placeholder="Image Name" type="text" />
+
+    <label for="imagelink">Link</label>
+    <input class="text" name="imagelink" placeholder="Link to image" type="text" required />
+
+    <label for="imagetitle">Title</label>
+    <input class="text" name="imagetitle" placeholder="Title of image (optional)" type="text" />
+
+    <label for="modelId">Model</label>
+    <select name="modelId">
+        <option value="">N/A</option>
+        <% models.forEach(function(model){ %>
+            <option value="<%= model.id %>"><%= `${model.first_name} ${model.last_name}` %></option>
+        <% }); %>
+    </select>
+
     <input class="btn" type="submit" value="Add" />
 </form>
 
@@ -15,7 +28,10 @@
 <ul>
     <% images.forEach(function(image){ %>
         <li>
-            <%= image.name %>
+            <%= `${image.Model ? image.Model.get('fullName') : 'N/A'} - ${image.link}` %>
+            <a href="/admin/images/<%= image.id %>/edit">
+                <button>Edit</button>
+            </a>
         </li>
     <% }); %>
 </ul>

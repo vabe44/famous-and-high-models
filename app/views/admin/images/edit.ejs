@@ -1,0 +1,24 @@
+<a href="/admin">
+<button>Go Back</button>
+</a>
+
+<h1>Edit Image</h1>
+
+<form id="edit-model-image" name="edit-model-image" method="post" action="/admin/images/<%= image.id %>/?_method=PUT">
+
+<label for="imagelink">Link</label>
+<input class="text" name="imagelink" value="<%= image.link %>" placeholder="Link to image" type="text" required />
+
+<label for="imagetitle">Title</label>
+<input class="text" name="imagetitle" value="<%= image.title %>" placeholder="Title of image (optional)" type="text" />
+
+<label for="modelId">Model</label>
+<select name="modelId">
+    <option value="">N/A</option>
+    <% models.forEach(function(model){ %>
+        <option <% if(model.id === image.model_id) { %> selected <% } %> value="<%= model.id %>"><%= `${model.first_name} ${model.last_name}` %></option>
+    <% }); %>
+</select>
+
+<input class="btn" type="submit" value="Update" />
+</form>
