@@ -1,0 +1,23 @@
+<h1>Model Categories</h1>
+
+<form id="add-model-category" name="add-model-category" method="post" action="/admin/categories/new">
+    <label for="categoryname">New Category</label>
+    <input class="text" name="categoryname" placeholder="Category Name" type="text" />
+    <input class="btn" type="submit" value="Add" />
+</form>
+
+<p><strong>Available categories:</strong></p>
+<% if(categories.length) { %>
+<ul>
+    <% categories.forEach(function(category){ %>
+        <li>
+            <%= category.name %>
+            <a href="/admin/categories/<%= category.id %>/edit">
+                <button>Edit</button>
+            </a>
+        </li>
+    <% }); %>
+</ul>
+<% }  else { %>
+No categories added yet.
+<% } %>

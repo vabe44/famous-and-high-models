@@ -1,0 +1,7 @@
+<h1>Edit Category</h1>
+
+<form id="edit-model-category" name="edit-model-category" method="post" action="/admin/categories/<%= category.id %>/?_method=PUT">
+    <label for="categoryname">Category Name</label>
+    <input class="text" name="categoryname" placeholder="Category Name" type="text" value="<%= category.name %>"/>
+    <input class="btn" type="submit" value="Update" />
+</form>

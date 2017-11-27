@@ -37,7 +37,12 @@ module.exports = function (sequelize, Sequelize) {
 			type: Sequelize.STRING
 		}
 	}, {
-		underscored: true
+		underscored: true,
+		classMethods: {
+			associate: function (models) {
+				models.Model.belongsTo(models.Category);
+			}
+		}
 	});
 
 }

@@ -1,4 +1,4 @@
-<h1>Add Models</h1>
+<h1>Add Model</h1>
 
 <form id="add-model" name="add-model" method="post" action="/admin/models/new">
 
@@ -28,27 +28,27 @@
     <br><br>
 
     <label for="hips">Hips</label>
-    <input class="text" name="Hips" type="text" />
+    <input class="text" name="hips" type="text" />
 
     <br><br>
 
     <label for="dress">Dress</label>
-    <input class="text" name="Dress" type="text" />
+    <input class="text" name="dress" type="text" />
 
     <br><br>
 
     <label for="shoe">Shoe</label>
-    <input class="text" name="Shoe" type="text" />
+    <input class="text" name="shoe" type="text" />
 
     <br><br>
 
     <label for="hair">Hair</label>
-    <input class="text" name="Hair" type="text" />
+    <input class="text" name="hair" type="text" />
 
     <br><br>
 
     <label for="eyes">Eyes</label>
-    <input class="text" name="Eyes" type="text" />
+    <input class="text" name="eyes" type="text" />
 
     <br><br>
 
@@ -60,7 +60,7 @@
 <ul>
     <% models.forEach(function(model){ %>
         <li>
-            <%= model.first_name %>
+            <%= `${model.first_name} ${model.last_name}` %>
         </li>
     <% }); %>
 </ul>

@@ -1,13 +1,15 @@
-var express    = require('express')
-var app        = express()
-var passport   = require('passport')
-var session    = require('express-session')
-var bodyParser = require('body-parser')
-var env        = require('dotenv').load()
+var express    = require('express');
+var app        = express();
+var passport   = require('passport');
+var session    = require('express-session');
+var bodyParser = require('body-parser');
+var methodOverride = require("method-override");
+var env        = require('dotenv').load();
 
 //For BodyParser
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+app.use(methodOverride("_method"));
 
 // For Passport
 app.use(session({ secret: 'keyboard cat', resave: true, saveUninitialized: true })); // session secret

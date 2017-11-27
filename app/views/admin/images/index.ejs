@@ -1,0 +1,20 @@
+<h1>Model Images</h1>
+
+<form id="add-model-image" name="add-model-image" method="post" action="/admin/images/new">
+    <label for="imagename">New Image</label>
+    <input class="text" name="imagename" placeholder="Image Name" type="text" />
+    <input class="btn" type="submit" value="Add" />
+</form>
+
+<p><strong>Available images:</strong></p>
+<% if(images.length > 0) { %>
+<ul>
+    <% images.forEach(function(image){ %>
+        <li>
+            <%= image.name %>
+        </li>
+    <% }); %>
+</ul>
+<% }  else { %>
+No images added yet.
+<% } %>
