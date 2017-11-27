@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const mw = require("../middlewares");
-const models = require("../models");
+const m = require("../models");
 
 /* GET admin page. */
 router.get('/', mw.isLoggedIn, function (req, res, next) {
@@ -11,10 +11,10 @@ router.get('/', mw.isLoggedIn, function (req, res, next) {
 /* GET new model page. */
 router.get('/models', mw.isLoggedIn, mw.asyncMiddleware(async (req, res, next) => {
 
-    const allModels = await models.Model.findAll();
-    const categories = await models.Category.findAll();
+    const models = await m.Model.findAll();
+    const categories = await m.Category.findAll();
     res.render('admin/models/index', {
-        allModels, categories
+        models, categories
     });
 
 }));
@@ -22,7 +22,7 @@ router.get('/models', mw.isLoggedIn, mw.asyncMiddleware(async (req, res, next) =
 /* POST new model page. */
 router.post('/models/new', mw.isLoggedIn, mw.asyncMiddleware(async (req, res, next) => {
 
-    await models.Model.create({
+    await m.Model.create({
         first_name: req.body.firstname,
         last_name: req.body.lastname,
         height: req.body.height,
@@ -42,8 +42,8 @@ router.post('/models/new', mw.isLoggedIn, mw.asyncMiddleware(async (req, res, ne
 /* GET model edit page */
 router.get("/models/:id/edit", mw.isLoggedIn, mw.asyncMiddleware(async (req, res, next) => {
 
-    const model = await models.Model.findById(req.params.id);
-    const categories = await models.Category.findAll();
+    const model = await m.Model.findById(req.params.id);
+    const categories = await m.Category.findAll();
     res.render('admin/models/edit', {
         model, categories
     });
@@ -53,7 +53,7 @@ router.get("/models/:id/edit", mw.isLoggedIn, mw.asyncMiddleware(async (req, res
 /* PUT model route */
 router.put("/models/:id", mw.isLoggedIn, mw.asyncMiddleware(async (req, res, next) => {
 
-    const model = await models.Model.findById(req.params.id);
+    const model = await m.Model.findById(req.params.id);
     await model.update({
         first_name: req.body.firstname,
         last_name: req.body.lastname,
@@ -74,7 +74,7 @@ router.put("/models/:id", mw.isLoggedIn, mw.asyncMiddleware(async (req, res, nex
 /* DELETE model category */
 router.delete('/models/:id', mw.isLoggedIn, mw.asyncMiddleware(async (req, res, next) => {
 
-    const model = await models.Model.findById(req.params.id);
+    const model = await m.Model.findById(req.params.id);
     await model.destroy();
     res.redirect('/admin/models');
 
@@ -83,7 +83,7 @@ router.delete('/models/:id', mw.isLoggedIn, mw.asyncMiddleware(async (req, res, 
 /* GET model categories page. */
 router.get('/categories', mw.isLoggedIn, mw.asyncMiddleware(async (req, res, next) => {
 
-    const categories = await models.Category.findAll();
+    const categories = await m.Category.findAll();
     res.render('admin/categories/index', { categories });
 
 }));
@@ -91,14 +91,14 @@ router.get('/categories', mw.isLoggedIn, mw.asyncMiddleware(async (req, res, nex
 /* POST model categories page. */
 router.post('/categories/new', mw.isLoggedIn, mw.asyncMiddleware(async (req, res, next) => {
 
-    await models.Category.create({ name: req.body.categoryname });
+    await m.Category.create({ name: req.body.categoryname });
     res.redirect('back');
 }));
 
 /* GET model category edit page */
 router.get("/categories/:id/edit", mw.isLoggedIn, mw.asyncMiddleware(async (req, res, next) => {
 
-    const category = await models.Category.findById(req.params.id);
+    const category = await m.Category.findById(req.params.id);
     res.render('admin/categories/edit', { category });
 
 }));
@@ -106,7 +106,7 @@ router.get("/categories/:id/edit", mw.isLoggedIn, mw.asyncMiddleware(async (req,
 /* PUT model category route */
 router.put("/categories/:id", mw.isLoggedIn, mw.asyncMiddleware(async (req, res, next) => {
 
-    const category = await models.Category.findById(req.params.id);
+    const category = await m.Category.findById(req.params.id);
     await category.update({ name: req.body.categoryname });
     res.redirect('/admin/categories');
 
@@ -115,7 +115,7 @@ router.put("/categories/:id", mw.isLoggedIn, mw.asyncMiddleware(async (req, res,
 /* DELETE model category */
 router.delete('/categories/:id', mw.isLoggedIn, mw.asyncMiddleware(async (req, res, next) => {
 
-    const category = await models.Category.findById(req.params.id);
+    const category = await m.Category.findById(req.params.id);
     await category.destroy();
     res.redirect('/admin/categories');
 
@@ -124,7 +124,7 @@ router.delete('/categories/:id', mw.isLoggedIn, mw.asyncMiddleware(async (req, r
 /* GET images page. */
 router.get('/images', mw.isLoggedIn, mw.asyncMiddleware(async (req, res, next) => {
 
-    const images = models.Image.findAll();
+    const images = m.Image.findAll();
     res.render('admin/images/index', { images });
 
 }));
@@ -132,7 +132,7 @@ router.get('/images', mw.isLoggedIn, mw.asyncMiddleware(async (req, res, next) =
 /* POST model images page. */
 router.post('/images/new', mw.isLoggedIn, mw.asyncMiddleware(async (req, res, next) => {
 
-    await models.Image.create({
+    await m.Image.create({
         link: req.body.imagelink,
         title: req.body.imagetitle,
         model_id: req.body.modelId,

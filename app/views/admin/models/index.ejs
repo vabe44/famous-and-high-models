@@ -69,9 +69,9 @@
 </form>
 
 <p><strong>Available models:</strong></p>
-<% if(allModels.length) { %>
+<% if(models.length) { %>
 <ul>
-    <% allModels.forEach(function(model){ %>
+    <% models.forEach(function(model){ %>
         <li>
             <%= `${model.first_name} ${model.last_name}` %>
             <a href="/admin/models/<%= model.id %>/edit">
