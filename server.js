@@ -1,10 +1,11 @@
-var express    = require('express');
-var app        = express();
-var passport   = require('passport');
-var session    = require('express-session');
-var bodyParser = require('body-parser');
-var methodOverride = require("method-override");
-var env        = require('dotenv').load();
+var express         = require('express');
+var path            = require('path');
+var app             = express();
+var passport        = require('passport');
+var session         = require('express-session');
+var bodyParser      = require('body-parser');
+var methodOverride  = require("method-override");
+var env             = require('dotenv').load();
 
 //For BodyParser
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -16,9 +17,10 @@ app.use(session({ secret: 'keyboard cat', resave: true, saveUninitialized: true 
 app.use(passport.initialize());
 app.use(passport.session()); // persistent login sessions
 
-//For Handlebars
-app.set('views', './app/views')
+//For Views
 app.set('view engine', 'ejs');
+app.set('views', './app/views')
+app.use(express.static(path.join(__dirname, '/app/public')));
 
 app.get('/', function(req, res){
     res.send('Welcome to Passport with Sequelize');
@@ -44,9 +46,12 @@ app.use(function (req, res, next) {
 });
 
 //Routes
+var indexRoute = require('./app/routes/index');
 var authRoute = require('./app/routes/auth.js')(app,passport);
 var adminRoute = require('./app/routes/admin');
 
+
+app.use('/', indexRoute);
 app.use('/admin', adminRoute);
 
 // catch 404 and forward to error handler

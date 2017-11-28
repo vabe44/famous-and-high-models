@@ -41,6 +41,7 @@ module.exports = function (sequelize, Sequelize) {
 		classMethods: {
 			associate: function (models) {
 				models.Model.belongsTo(models.Category);
+				models.Model.hasMany(models.Image);
 			}
 		},
 		getterMethods: {
