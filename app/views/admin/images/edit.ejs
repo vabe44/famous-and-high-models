@@ -1,24 +1,52 @@
-<a href="/admin">
-<button>Go Back</button>
-</a>
+<html>
 
-<h1>Edit Image</h1>
+<head>
+    <meta charset="UTF-8">
+    <title>Famous & High Models</title>
+    <link rel="stylesheet" type="text/css" href="/css/paper.min.css" />
+    <link rel="stylesheet" type="text/css" href="/css/style.css" />
+</head>
 
-<form id="edit-model-image" name="edit-model-image" method="post" action="/admin/images/<%= image.id %>/?_method=PUT">
+<body>
 
-<label for="imagelink">Link</label>
-<input class="text" name="imagelink" value="<%= image.link %>" placeholder="Link to image" type="text" required />
+    <% include ../../partials/header %>
 
-<label for="imagetitle">Title</label>
-<input class="text" name="imagetitle" value="<%= image.title %>" placeholder="Title of image (optional)" type="text" />
+    <div id="container">
 
-<label for="modelId">Model</label>
-<select name="modelId">
-    <option value="">N/A</option>
-    <% models.forEach(function(model){ %>
-        <option <% if(model.id === image.model_id) { %> selected <% } %> value="<%= model.id %>"><%= `${model.first_name} ${model.last_name}` %></option>
-    <% }); %>
-</select>
+        <div class="pagetitle">
+            <h1>Edit Image</h1>
+        </div>
 
-<input class="btn" type="submit" value="Update" />
-</form>
+        <form id="edit-model-image" name="edit-model-image" method="post" action="/admin/images/<%= image.id %>/?_method=PUT">
+            <label for="imagelink">Link</label>
+            <input class="text" name="imagelink" value="<%= image.link %>" placeholder="Link to image" type="text" required />
+
+            <br>
+
+            <label for="imagetitle">Title</label>
+            <input class="text" name="imagetitle" value="<%= image.title %>" placeholder="Title of image (optional)" type="text" />
+
+            <br>
+
+            <label for="modelId">Model</label>
+            <select name="modelId">
+                <option value="">N/A</option>
+                <% models.forEach(function(model){ %>
+                    <option <% if(model.id === image.model_id) { %> selected <% } %> value="<%= model.id %>"><%= `${model.first_name} ${model.last_name}` %></option>
+                <% }); %>
+            </select>
+
+            <br>
+
+            <button class="btn-block">Update</button>
+        </form>
+
+        <form class="form-inline" id="delete-form" action="/admin/images/<%= image.id %>?_method=DELETE" method="POST">
+            <button type="submit">Delete</button>
+        </form>
+
+    </div>
+
+</body>
+
+</html>

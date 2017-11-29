@@ -1,88 +1,39 @@
-<style>
+<html>
 
-body {
-    display: flex;
-    justify-content: center;
-}
+<head>
+    <meta charset="UTF-8">
+    <title>Famous & High Models</title>
+    <link rel="stylesheet" type="text/css" href="/css/paper.min.css" />
+    <link rel="stylesheet" type="text/css" href="/css/style.css" />
+</head>
 
-#container {
-    display: flex;
-    flex-direction: column;
-    background-color: grey;
-    width: 80%;
-}
+<body>
 
-#header {
-    display: flex;
-    justify-content: center;
-    background-color: orchid;
-    width: 100%;
-}
+    <% include ../partials/header %>
 
-#modelcontainer {
-    display: flex;
-    flex-wrap: wrap;
-    background-color: red;
-}
+    <div id="container">
 
-.modelbox {
-    width: 23%;
-    height: 33%;
-    padding: 1%;
-    flex-direction: column;
-    background-color: white;
-}
+        <div id="modelsgrid">
+            <% models.forEach(function(model){ %>
 
-.modelimage {
-    height: 90%;
-    display: flex;
-    justify-content: center;
-    overflow: hidden;
-}
+                <div class="modelbox">
+                    <a href="/models/<%= model.id %>">
+                        <div class="modelimage">
+                            <img class="no-border" src="<%= model.Images[0].link %>" alt="<%= model.Images[0].title %>">
+                        </div>
+                        <div class="modelname">
+                            <h4>
+                                <%= model.get('fullName') %>
+                            </h4>
+                        </div>
+                    </a>
+                </div>
 
-.modelimage img {
-    width: auto;
-    height: 100%;
-}
-
-.modelname {
-    height: 10%;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-}
-
-@media only screen and (max-device-width: 768px), screen and (max-width: 768px) {
-
-    .modelbox {
-        width: 48%;
-        height: 50%;
-    }
-
-}
-
-</style>
-
-<div id="container">
-
-    <div id="header">
-        <h1>Models</h1>
-    </div>
-
-    <div id="modelcontainer">
-    <% models.forEach(function(model){ %>
-
-        <div class="modelbox">
-            <div class="modelimage">
-                <img src="<%= model.Images[0].link %>" alt="<%= model.Images[0].title %>">
-            </div>
-            <div class="modelname">
-                <%= model.get('fullName') %>
-            </div>
+            <% }); %>
         </div>
 
-    <% }); %>
     </div>
 
-</div>
+</body>
+
+</html>

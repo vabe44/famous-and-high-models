@@ -1,31 +1,33 @@
-<!DOCTYPE html>
 <html>
+
 <head>
-	<title>Passport with Sequelize</title>
+    <meta charset="UTF-8">
+    <title>Famous & High Models</title>
+    <link rel="stylesheet" type="text/css" href="/css/paper.min.css" />
+    <link rel="stylesheet" type="text/css" href="/css/style.css" />
 </head>
+
 <body>
-<h2>Dashboard</h2>
-<h5>Hurray! You are logged in.</h5>
 
-<p>
-	<a href="/admin/models">
-		<button>Manage Models</button>
-	</a>
+    <% include ../partials/header %>
 
-	<a href="/admin/categories">
-		<button>Manage Categories</button>
-	</a>
+    <div id="container">
 
-	<a href="/admin/images">
-		<button>Manage Images</button>
-	</a>
-</p>
+		<h1>Admin</h1>
 
-<p>
-	<a href="/logout">
-		<button>Log out</button>
-	</a>
-</p>
+		<div class="adminbuttons">
+			<a href="/admin/models" class="paper-btn">Manage Models</a>
+			<a href="/admin/categories" class="paper-btn">Manage Categories</a>
+			<a href="/admin/images" class="paper-btn">Manage Images</a>
+		</div>
+
+		<div class="logout">
+			<a href="/logout" class="paper-btn">Log out</a>
+		</div>
+
+
+    </div>
 
 </body>
+
 </html>

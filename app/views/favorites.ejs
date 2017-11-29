@@ -1,0 +1,55 @@
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Famous & High Models</title>
+    <link rel="stylesheet" type="text/css" href="/css/paper.min.css" />
+    <link rel="stylesheet" type="text/css" href="/css/style.css" />
+</head>
+
+<body>
+
+    <% include partials/header %>
+
+    <div id="container">
+
+        <div id="modelsgrid">
+
+                <div class="modelbox" hidden>
+                    <a href="">
+                        <div class="modelimage">
+                            <img class="no-border" src="" alt="">
+                        </div>
+                        <div class="modelname">
+                            <h4>
+                            </h4>
+                        </div>
+                    </a>
+                </div>
+
+        </div>
+
+    </div>
+
+    <script>
+            window.onload = checkFavorites;
+            function checkFavorites() {
+                if (localStorage.getItem("favorites")) {
+                    var favorites = JSON.parse(localStorage.getItem('favorites'));
+                    var modelsgrid = document.getElementById('modelsgrid');
+                    favorites.forEach(model => {
+                        var node = document.getElementsByClassName('modelbox')[0];
+                        var dupNode = node.cloneNode(true);
+                        dupNode.getElementsByTagName('a')[0].setAttribute('href', '/models/'+model.id);
+                        dupNode.getElementsByTagName('img')[0].setAttribute('src', model.image);
+                        dupNode.getElementsByTagName('h4')[0].innerText = model.name;
+                        dupNode.removeAttribute('hidden');
+                        modelsgrid.appendChild(dupNode);
+                    });
+                }
+            };
+    </script>
+
+</body>
+
+</html>

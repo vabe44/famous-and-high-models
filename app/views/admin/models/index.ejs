@@ -1,85 +1,121 @@
-<a href="/admin">
-    <button>Go Back</button>
-</a>
+<html>
 
-<h1>Add Model</h1>
+<head>
+    <meta charset="UTF-8">
+    <title>Famous & High Models</title>
+    <link rel="stylesheet" type="text/css" href="/css/paper.min.css" />
+    <link rel="stylesheet" type="text/css" href="/css/style.css" />
+</head>
 
-<form id="add-model" name="add-model" method="post" action="/admin/models/new">
+<body>
 
-    <label for="category">Category</label>
-    <select name="category">
-        <% categories.forEach(function(category){ %>
-            <option value="<%= category.id %>"><%= category.name %></option>
-        <% }); %>
-    </select>
+    <% include ../../partials/header %>
 
-    <br><br>
+    <div id="container">
 
-    <label for="firstname">First Name</label>
-    <input class="text" name="firstname" type="text" />
+        <div class="pagetitle">
+            <h1>Add Model</h1>
+        </div>
 
-    <br><br>
+        <form id="add-model" name="add-model" method="post" action="/admin/models/new">
 
-    <label for="lastname">Last Name</label>
-    <input class="text" name="lastname" type="text" />
+            <label for="category">Category</label>
+            <select name="category">
+                <% categories.forEach(function(category){ %>
+                    <option value="<%= category.id %>"><%= category.name %></option>
+                <% }); %>
+            </select>
 
-    <br><br>
+            <br><br>
 
-    <label for="height">Height (cm)</label>
-    <input class="text" name="height" type="text" />
+            <label for="firstname">First Name</label>
+            <input class="text" name="firstname" type="text" />
 
-    <br><br>
+            <br><br>
 
-    <label for="bust">Bust</label>
-    <input class="text" name="bust" type="text" />
+            <label for="lastname">Last Name</label>
+            <input class="text" name="lastname" type="text" />
 
-    <br><br>
+            <br><br>
 
-    <label for="waist">Waist</label>
-    <input class="text" name="waist" type="number" step="0.1" />
+            <label for="height">Height (cm)</label>
+            <input class="text" name="height" type="text" />
 
-    <br><br>
+            <br><br>
 
-    <label for="hips">Hips</label>
-    <input class="text" name="hips" type="number" step="0.1" />
+            <label for="bust">Bust</label>
+            <input class="text" name="bust" type="text" />
 
-    <br><br>
+            <br><br>
 
-    <label for="dress">Dress</label>
-    <input class="text" name="dress" type="text" />
+            <label for="waist">Waist</label>
+            <input class="text" name="waist" type="number" step="0.1" />
 
-    <br><br>
+            <br><br>
 
-    <label for="shoe">Shoe</label>
-    <input class="text" name="shoe" type="text" />
+            <label for="hips">Hips</label>
+            <input class="text" name="hips" type="number" step="0.1" />
 
-    <br><br>
+            <br><br>
 
-    <label for="hair">Hair</label>
-    <input class="text" name="hair" type="text" />
+            <label for="dress">Dress</label>
+            <input class="text" name="dress" type="text" />
 
-    <br><br>
+            <br><br>
 
-    <label for="eyes">Eyes</label>
-    <input class="text" name="eyes" type="text" />
+            <label for="shoe">Shoe</label>
+            <input class="text" name="shoe" type="text" />
 
-    <br><br>
+            <br><br>
 
-    <input class="btn" type="submit" value="Add Model" />
-</form>
+            <label for="hair">Hair</label>
+            <input class="text" name="hair" type="text" />
 
-<p><strong>Available models:</strong></p>
-<% if(models.length) { %>
-<ul>
-    <% models.forEach(function(model){ %>
-        <li>
-            <%= `${model.first_name} ${model.last_name}` %>
-            <a href="/admin/models/<%= model.id %>/edit">
-                <button>Edit</button>
-            </a>
-        </li>
-    <% }); %>
-</ul>
-<% }  else { %>
-No models added yet.
-<% } %>
+            <br><br>
+
+            <label for="eyes">Eyes</label>
+            <input class="text" name="eyes" type="text" />
+
+            <br><br>
+
+            <button class="btn-block">Add Model</button>
+        </form>
+
+        <p><strong>Available models:</strong></p>
+        <% if(models.length) { %>
+
+            <table class="table-hover">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Name</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                <% models.forEach(function(model){ %>
+
+                    <tr>
+                        <td><%= model.id %></td>
+                        <td><%= model.get('fullName') %></td>
+                        <td style="display:flex;justify-content:flex-end;">
+                            <a href="/admin/models/<%= model.id %>/edit">
+                                <button>Edit</button>
+                            </a>
+                        </td>
+                    </tr>
+
+                <% }); %>
+                </tbody>
+            </table>
+
+        <% }  else { %>
+        No models added yet.
+        <% } %>
+
+    </div>
+
+</body>
+
+</html>

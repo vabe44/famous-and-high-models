@@ -1,27 +1,63 @@
-<a href="/admin">
-    <button>Go Back</button>
-</a>
+<html>
 
-<h1>Model Categories</h1>
+<head>
+    <meta charset="UTF-8">
+    <title>Famous & High Models</title>
+    <link rel="stylesheet" type="text/css" href="/css/paper.min.css" />
+    <link rel="stylesheet" type="text/css" href="/css/style.css" />
+</head>
 
-<form id="add-model-category" name="add-model-category" method="post" action="/admin/categories/new">
-    <label for="categoryname">New Category</label>
-    <input class="text" name="categoryname" placeholder="Category Name" type="text" />
-    <input class="btn" type="submit" value="Add" />
-</form>
+<body>
 
-<p><strong>Available categories:</strong></p>
-<% if(categories.length) { %>
-<ul>
-    <% categories.forEach(function(category){ %>
-        <li>
-            <%= category.name %>
-            <a href="/admin/categories/<%= category.id %>/edit">
-                <button>Edit</button>
-            </a>
-        </li>
-    <% }); %>
-</ul>
-<% }  else { %>
-No categories added yet.
-<% } %>
+    <% include ../../partials/header %>
+
+    <div id="container">
+
+        <div class="pagetitle">
+            <h1>Model Categories</h1>
+        </div>
+
+        <form id="add-model-category" name="add-model-category" method="post" action="/admin/categories/new">
+            <label for="categoryname">New Category</label>
+            <input class="text" name="categoryname" placeholder="Category Name" type="text" />
+            <button class="btn-block">Add</button>
+        </form>
+
+        <p><strong>Available categories:</strong></p>
+        <% if(categories.length) { %>
+
+            <table class="table-hover">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Name</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                <% categories.forEach(function(category){ %>
+
+                    <tr>
+                        <td><%= category.id %></td>
+                        <td><%= category.name %></td>
+                        <td style="display:flex;justify-content:flex-end;">
+                            <a href="/admin/categories/<%= category.id %>/edit">
+                                <button>Edit</button>
+                            </a>
+                        </td>
+                    </tr>
+
+                <% }); %>
+                </tbody>
+            </table>
+
+        <% }  else { %>
+        No categories added yet.
+        <% } %>
+
+    </div>
+
+</body>
+
+</html>

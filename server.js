@@ -22,10 +22,6 @@ app.set('view engine', 'ejs');
 app.set('views', './app/views')
 app.use(express.static(path.join(__dirname, '/app/public')));
 
-app.get('/', function(req, res){
-    res.send('Welcome to Passport with Sequelize');
-});
-
 // Models
 var models = require("./app/models");
 
@@ -47,7 +43,7 @@ app.use(function (req, res, next) {
 
 //Routes
 var indexRoute = require('./app/routes/index');
-var authRoute = require('./app/routes/auth.js')(app,passport);
+var authRoute = require('./app/routes/auth')(app,passport);
 var adminRoute = require('./app/routes/admin');
 
 

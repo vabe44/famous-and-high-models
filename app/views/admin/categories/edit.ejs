@@ -1,17 +1,34 @@
-<a href="/admin/categories">
-    <button>Go Back</button>
-</a>
+<html>
 
-<h1>Edit Category</h1>
+<head>
+    <meta charset="UTF-8">
+    <title>Famous & High Models</title>
+    <link rel="stylesheet" type="text/css" href="/css/paper.min.css" />
+    <link rel="stylesheet" type="text/css" href="/css/style.css" />
+</head>
 
-<form id="edit-model-category" name="edit-model-category" method="post" action="/admin/categories/<%= category.id %>/?_method=PUT">
-    <label for="categoryname">Category Name</label>
-    <input class="text" name="categoryname" placeholder="Category Name" type="text" value="<%= category.name %>"/>
-    <input class="btn" type="submit" value="Update" />
-</form>
+<body>
 
-<br><br>
+    <% include ../../partials/header %>
 
-<form class="form-inline" id="delete-form" action="/admin/categories/<%= category.id %>?_method=DELETE" method="POST">
-    <input class="btn" type="submit" value="Delete" />
-</form>
+    <div id="container">
+
+        <div class="pagetitle">
+            <h1>Edit Category</h1>
+        </div>
+
+        <form id="edit-model-category" name="edit-model-category" method="post" action="/admin/categories/<%= category.id %>/?_method=PUT">
+            <label for="categoryname">Category Name</label>
+            <input class="text" name="categoryname" placeholder="Category Name" type="text" value="<%= category.name %>"/>
+            <button class="btn-block">Update</button>
+        </form>
+
+        <form class="form-inline" id="delete-form" action="/admin/categories/<%= category.id %>?_method=DELETE" method="POST">
+            <button type="submit">Delete</button>
+        </form>
+
+    </div>
+
+</body>
+
+</html>

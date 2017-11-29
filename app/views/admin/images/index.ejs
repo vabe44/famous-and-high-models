@@ -1,40 +1,85 @@
-<a href="/admin">
-    <button>Go Back</button>
-</a>
+<html>
 
-<h1>Model Images</h1>
+<head>
+    <meta charset="UTF-8">
+    <title>Famous & High Models</title>
+    <link rel="stylesheet" type="text/css" href="/css/paper.min.css" />
+    <link rel="stylesheet" type="text/css" href="/css/style.css" />
+</head>
 
-<form id="add-model-image" name="add-model-image" method="post" action="/admin/images/new">
+<body>
 
-    <label for="imagelink">Link</label>
-    <input class="text" name="imagelink" placeholder="Link to image" type="text" required />
+    <% include ../../partials/header %>
 
-    <label for="imagetitle">Title</label>
-    <input class="text" name="imagetitle" placeholder="Title of image (optional)" type="text" />
+    <div id="container">
 
-    <label for="modelId">Model</label>
-    <select name="modelId">
-        <option value="">N/A</option>
-        <% models.forEach(function(model){ %>
-            <option value="<%= model.id %>"><%= `${model.first_name} ${model.last_name}` %></option>
-        <% }); %>
-    </select>
+        <div class="pagetitle">
+            <h1>Model Images</h1>
+        </div>
 
-    <input class="btn" type="submit" value="Add" />
-</form>
+        <form id="add-model-image" name="add-model-image" method="post" action="/admin/images/new">
+            <label for="imagelink">Link</label>
+            <input class="text" name="imagelink" placeholder="Link to image" type="text" required />
 
-<p><strong>Available images:</strong></p>
-<% if(images.length > 0) { %>
-<ul>
-    <% images.forEach(function(image){ %>
-        <li>
-            <%= `${image.Model ? image.Model.get('fullName') : 'N/A'} - ${image.link}` %>
-            <a href="/admin/images/<%= image.id %>/edit">
-                <button>Edit</button>
-            </a>
-        </li>
-    <% }); %>
-</ul>
-<% }  else { %>
-No images added yet.
-<% } %>
+            <br>
+
+            <label for="imagetitle">Title</label>
+            <input class="text" name="imagetitle" placeholder="Title of image (optional)" type="text" />
+
+            <br>
+
+            <label for="modelId">Model</label>
+            <select name="modelId">
+                <option value="">N/A</option>
+                <% models.forEach(function(model){ %>
+                    <option value="<%= model.id %>"><%= `${model.first_name} ${model.last_name}` %></option>
+                <% }); %>
+            </select>
+
+            <br>
+
+            <button class="btn-block">Add</button>
+        </form>
+
+        <p><strong>Available images:</strong></p>
+        <% if(images.length > 0) { %>
+
+            <table class="table-hover">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Model Name</th>
+                        <th>Link</th>
+                        <th>Title</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                <% images.forEach(function(image){ %>
+
+                    <tr>
+                        <td><%= image.id %></td>
+                        <td><%= image.Model.get('fullName') %></td>
+                        <td><%= image.link %></td>
+                        <td><%= image.title %></td>
+                        <td style="display:flex;justify-content:flex-end;">
+                            <a href="/admin/images/<%= image.id %>/edit">
+                                <button>Edit</button>
+                            </a>
+                        </td>
+                    </tr>
+
+                <% }); %>
+                </tbody>
+            </table>
+
+        <% }  else { %>
+            No images added yet.
+        <% } %>
+
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,248 @@
+/* OVERWRITE PAPERCSS VALUES */
+a {
+    background-image: none;
+}
+
+[popover] {
+    margin: 0px;
+}
+
+/* GLOBAL */
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* background-color: black; */
+}
+
+#header {
+    width: 80%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    /* background-color: orchid; */
+}
+
+#header .logo {
+    width: 25%;
+    display: flex;
+    align-items: center;
+}
+
+#header .logo h1 {
+    padding-left: 10px;
+}
+
+#header .logo img {
+    width: 100px;
+    height: 100px;
+}
+
+#header .menu {
+    width: 50%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+}
+
+#container {
+    display: flex;
+    flex-direction: column;
+    /* background-color: grey; */
+    width: 80%;
+}
+
+/* FRONT PAGE */
+
+#modelsgrid {
+    display: flex;
+    flex-wrap: wrap;
+    /* background-color: red; */
+}
+
+.modelbox {
+    width: 33%;
+    height: 50%;
+    padding: 1%;
+    flex-direction: column;
+    /* background-color: white; */
+    overflow: hidden;
+}
+
+.modelbox a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden;
+}
+
+.modelimage {
+    height: 90%;
+    width: fit-content;
+    /* display: flex; */
+    /* justify-content: center; */
+    overflow: hidden;
+}
+
+.modelimage img {
+    /* width: 120%; */
+    height: 100%;
+    max-width: unset;
+    margin: auto;
+}
+
+.modelname {
+    height: 10%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+@media only screen and (max-device-width: 768px), screen and (max-width: 768px) {
+
+    .modelbox {
+        width: 50%;
+    }
+
+}
+
+@media only screen and (max-device-width: 1120px), screen and (max-width: 1120px) {
+
+    #header {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-self: center;
+    }
+
+    #header .logo {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    #header .menu {
+        width: 100%;
+        padding-bottom: 5%;
+    }
+
+}
+
+/* MODEL PAGE */
+
+#modelcontainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.modeldetails {
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* background-color: white; */
+}
+
+.modeldetails h2 {
+    width: 90%;
+    margin: 1rem 0 1rem 0;
+    text-align: center;
+}
+
+.details {
+    width: 100%;
+    padding: 2% 0 2% 0;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.modeldetails .name {
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.favorite {
+    width: 5%;
+}
+
+i.favorite.empty.star.icon, i.favorite.star.icon {
+    width: 5%;
+}
+
+#model-image-gallery {
+    width: 80%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.galleryimage {
+    width: 50%;
+    padding: 1%;
+}
+
+.galleryimage img {
+    margin: auto;
+}
+
+.modelimage img:hover, .galleryimage img:hover {
+    filter: grayscale(100%);
+    filter: saturate(0);
+    transition: all .3s ease;
+}
+
+/* LOGIN PAGE */
+
+h1 {
+    text-align: center;
+    margin: .5em 0;
+}
+
+form#login, .emaildiv, .passworddiv, #add-model-category, #edit-model-category, form#add-model, form#edit-model, form#add-model-image, form#edit-model-image {
+    display: flex;
+    flex-direction: column;
+    padding: 1% 0 1% 0;
+}
+
+form#login button, form#add-model-category button, form#edit-model-category button, form#add-model button, form#edit-model button, form#add-model-image button, form#edit-model-image button {
+    margin-top: 1%;
+}
+
+/* ADMIN PAGE */
+.adminbuttons {
+    display: flex;
+    justify-content: space-around;
+}
+
+.adminbuttons a {
+    background-color: #868e96;
+    color: white;
+}
+
+.logout {
+    display: flex;
+    justify-content: flex-end;
+    height: 50%;
+}
+
+.logout a {
+    background-color: #a7342d;
+    color: white;
+}
+
+/* EDIT MODEL CATEGORIES */
+
+form#delete-form {
+    display: flex;
+    justify-content: flex-end;
+}
+
+form#delete-form button {
+    background-color: #a7342d;
+    color: white;
+}

@@ -1,0 +1,156 @@
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title><%= model.get('fullName') %> - Famous and High Models</title>
+    <link rel="stylesheet" type="text/css" href="/css/paper.min.css" />
+    <link rel="stylesheet" type="text/css" href="/css/icon.min.css" />
+    <link rel="stylesheet" type="text/css" href="/css/style.css" />
+</head>
+
+<body>
+
+    <% include ../partials/header %>
+
+    <div id="modelcontainer">
+
+        <div class="modeldetails">
+            <div class="spacer"></div>
+            <div class="name">
+                <div class="favorite spacer"></div>
+                <h2>
+                    <%= model.get('fullName') %>
+                </h2>
+                <i class="favorite empty star icon" data-id="<%= model.id %>" data-name="<%= model.get('fullName') %>" data-image="<%= model.Images[0].link %>" onclick="addToFavorites(this)"></i>
+            </div>
+            <div class="details">
+
+                <div class="detail">
+                    <strong>HEIGHT: </strong>
+                    <span class="badge success">
+                        <%= model.height %>
+                    </span>
+                </div>
+
+                <div class="detail">
+                    <strong>BUST: </strong>
+                    <span class="badge success">
+                        <%= model.bust %>
+                    </span>
+                </div>
+
+                <div class="detail">
+                    <strong>WAIST: </strong>
+                    <span class="badge success">
+                        <%= model.waist %>
+                    </span>
+                </div>
+
+                <div class="detail">
+                    <strong>HIPS: </strong>
+                    <span class="badge success">
+                        <%= model.hips %>
+                    </span>
+                </div>
+
+                <div class="detail">
+                    <strong>DRESS: </strong>
+                    <span class="badge success">
+                        <%= model.dress %>
+                    </span>
+                </div>
+
+                <div class="detail">
+                    <strong>SHOE: </strong>
+                    <span class="badge success">
+                        <%= model.shoe %>
+                    </span>
+                </div>
+
+                <div class="detail">
+                    <strong>HAIR: </strong>
+                    <span class="badge success">
+                        <%= model.hair %>
+                    </span>
+                </div>
+
+                <div class="detail">
+                    <strong>EYES: </strong>
+                    <span class="badge success">
+                        <%= model.eyes %>
+                    </span>
+                </div>
+
+            </div>
+        </div>
+
+        <div id="model-image-gallery">
+            <% model.Images.forEach(image => { %>
+
+                <div class="galleryimage">
+                    <img src="<%= image.link %>" alt="<%= image.title %>">
+                </div>
+
+            <% }); %>
+        </div>
+
+    </div>
+
+<script>
+    function addToFavorites(sender) {
+        var model = {
+            id: sender.dataset.id,
+            name: sender.dataset.name,
+            image: sender.dataset.image,
+        };
+
+        if(localStorage.getItem('favorites')) {
+            var favorites = JSON.parse(localStorage.getItem('favorites'));
+            favorites.push(model);
+            localStorage.setItem('favorites', JSON.stringify(favorites));
+        } else {
+            var favorites = [];
+            favorites.push(model);
+            localStorage.setItem('favorites', JSON.stringify(favorites));
+        }
+        sender.setAttribute('onclick', 'removeFromFavorites(this)');
+        sender.classList.remove("empty");
+    }
+</script>
+
+<script>
+    function removeFromFavorites(sender) {
+        if(localStorage.getItem('favorites')) {
+            var favorites = JSON.parse(localStorage.getItem('favorites'));
+            for(var i = 0; i < favorites.length; i++) {
+                if (favorites[i].id == sender.dataset.id) {
+                    favorites.splice(i, 1);
+                    localStorage.setItem('favorites', JSON.stringify(favorites));
+                    break;
+                }
+            }
+        }
+        sender.setAttribute('onclick', 'addToFavorites(this)');
+        sender.classList.add("empty");
+    }
+</script>
+
+<script>
+        window.onload = checkFavorite;
+        function checkFavorite() {
+            if (localStorage.getItem("favorites")) {
+                var favoriteElement = document.getElementsByClassName('favorite empty star icon')[0];
+                var favorites = JSON.parse(localStorage.getItem('favorites'));
+                for(var i = 0; i < favorites.length; i++) {
+                    if (favorites[i].id == favoriteElement.dataset.id) {
+                        favoriteElement.setAttribute('onclick', 'removeFromFavorites(this)');
+                        favoriteElement.classList.remove("empty");
+                    }
+                }
+            }
+        };
+</script>
+
+</body>
+
+</html>
