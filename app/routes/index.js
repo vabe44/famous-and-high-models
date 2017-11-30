@@ -5,7 +5,7 @@ const m = require("../models");
 
 /* GET index page. */
 router.get('/', function(req, res, next) {
-    res.redirect('/models');
+    res.render('index');
 });
 
 /* GET index page. */
