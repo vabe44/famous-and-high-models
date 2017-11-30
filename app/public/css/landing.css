@@ -3,6 +3,8 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
+    font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif; 
+    font-weight: 300;
 }
 
 #landing-header {
@@ -15,11 +17,17 @@ body {
 
 #landing-header h1 {
     color: #fff;
+    font-weight: bolder;
+    margin: 0 0 0 0;
 }
 
-a.paper-btn {
-    border: 2px solid white;
+a.paper-btn, a.paper-btn:hover {
+    border: none;
     color: white;
+    font-size: smaller;
+    box-shadow: none !important;
+    -webkit-box-shadow: none !important;
+    text-transform: uppercase;
 }
 
 .slideshow {

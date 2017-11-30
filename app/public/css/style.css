@@ -18,19 +18,23 @@ body {
 #header {
     width: 80%;
     display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    /* background-color: orchid; */
-}
-
-#header .logo {
-    width: 25%;
-    display: flex;
+    flex-direction: column;
+    justify-content: center;
     align-items: center;
 }
 
+#header .logo {
+    /* width: 25%; */
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 #header .logo h1 {
-    padding-left: 10px;
+    font-weight: bolder;
+    /* padding-left: 10px; */
+    margin: 1% 0 0 0;
 }
 
 #header .logo img {
@@ -48,6 +52,15 @@ body {
     flex-direction: row;
     align-items: center;
     justify-content: space-around;
+}
+
+#header .menu > a, #header .menu > a:hover {
+    color: #41403e;
+    text-transform: uppercase;
+    font-size: smaller;
+    border: none;
+    box-shadow: none !important;
+    -webkit-box-shadow: none !important;
 }
 
 #container {
@@ -249,4 +262,24 @@ form#delete-form {
 form#delete-form button {
     background-color: #a7342d;
     color: white;
+}
+
+/* ABOUT PAGE */
+
+.aboutcontainer {
+    display: flex;
+}
+
+.abouttext {
+    width: 50%;
+}
+
+.abouttext h3 {
+    font-weight: bolder;
+}
+
+.aboutpicture {
+    width: 50%;
+    display: flex;
+    align-items: center;
 }

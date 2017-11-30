@@ -26,4 +26,9 @@ router.get('/favorites', function(req, res, next) {
     res.render('favorites');
 });
 
+/* GET index page. */
+router.get('/aboutus', function(req, res, next) {
+    res.render('aboutus');
+});
+
 module.exports = router;
