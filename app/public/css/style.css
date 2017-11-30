@@ -38,6 +38,10 @@ body {
     height: 100px;
 }
 
+#header > a {
+    color: #41403e;
+}
+
 #header .menu {
     width: 50%;
     display: flex;
