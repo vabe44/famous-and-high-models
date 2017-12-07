@@ -3,9 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <title>Famous & High Models</title>
+    <link rel="stylesheet" type="text/css" href="/css/semantic.min.css" />
     <link rel="stylesheet" type="text/css" href="/css/paper.min.css" />
-	<link rel="stylesheet" type="text/css" href="/css/style.css" />
-	<link rel="stylesheet" type="text/css" href="/css/icon.min.css" />
+    <link rel="stylesheet" type="text/css" href="/css/icon.min.css" />
+    <link rel="stylesheet" type="text/css" href="/css/style.css" />
+    <script type="text/javascript" src="/js/jquery-2.2.4.min.js"></script>
+    <script type="text/javascript" src="/js/semantic.min.js"></script>
 </head>
 
 <body>
@@ -19,7 +22,8 @@
 		<div class="adminbuttons">
 			<a href="/admin/models" class="paper-btn">Manage Models</a>
 			<a href="/admin/categories" class="paper-btn">Manage Categories</a>
-			<a href="/admin/images" class="paper-btn">Manage Images</a>
+      <a href="/admin/images" class="paper-btn">Manage Images</a>
+      <a href="/admin/applicants" class="paper-btn">Applicants</a>
 		</div>
 
 		<div class="logout">
@@ -28,6 +32,10 @@
 
 
     </div>
+
+    <script>
+		$('.ui.dropdown').dropdown();
+	</script>
 
 </body>
 

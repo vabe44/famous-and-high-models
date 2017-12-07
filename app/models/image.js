@@ -14,6 +14,10 @@ module.exports = function (sequelize, DataTypes) {
         title: {
             type: DataTypes.STRING
         },
+        type: {
+			type: DataTypes.ENUM('portfolio', 'poloroid'),
+			defaultValue: 'portfolio'
+		}
     }, {
         underscored: true,
         classMethods: {

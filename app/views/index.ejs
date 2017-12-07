@@ -5,9 +5,12 @@
     <title>Famous & High Models</title>
     <link rel="stylesheet" type="text/css" href="/css/assets/fonts/fonts.css" />
     <link rel="stylesheet" type="text/css" href="/css/paper.min.css" />
+    <link rel="stylesheet" type="text/css" href="/css/semantic.min.css" />
     <link rel="stylesheet" type="text/css" href="/css/landing.css" />
     <link rel="stylesheet" type="text/css" href="/css/icon.min.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js" type="text/javascript" async></script>
+    <script type="text/javascript" src="/js/jquery-2.2.4.min.js"></script>
+    <script type="text/javascript" src="/js/semantic.min.js"></script>
 </head>
 
 <body>
@@ -16,7 +19,7 @@
         <div class="title">
             <h1>FAMOUS AND HIGH</h1>
         </div>
-         <div class="menu">
+         <!-- <div class="menu">
             <a href="/admin" class="paper-btn" popover="Edit stuff" popover-position="bottom" <%= currentUser ? '' : 'hidden' %>>Admin</a>
             <a href="/models" class="paper-btn" popover="Browse" popover-position="bottom">Models</a>
             <a href="/favorites" class="paper-btn" popover="Your Favorites" popover-position="bottom">Favorites</a>
@@ -25,7 +28,49 @@
             <a href="https://instagram.com/famousandhigh" class="paper-btn" popover="@famousandhigh" popover-position="bottom">
                 <i class="instagram icon"></i>
             </a>
-        </div>
+        </div> -->
+            <div class="ui text menu">
+
+                <div class="ui right dropdown item">
+                    Models
+                    <i class="dropdown icon"></i>
+                    <div class="menu">
+                        <div class="item"><a href="/women" style="color:black;">Women</a></div>
+                        <div class="item"><a href="/men" style="color:black;">Men</a></div>
+                        <div class="item"><a href="/event-popups" style="color:black;">Event + Popups</a></div>
+                        <div class="item"><a href="/products" style="color:black;">Products</a></div>
+                    </div>
+                </div>
+
+                <div class="ui right item">
+                    <a href="/about">About Us</a>
+                </div>
+
+                <div class="ui right item">
+                    <a href="/join">Join</a>
+                </div>
+
+                <div class="ui right item">
+                    <a href="/favorites">Favorites</a>
+                </div>
+
+                <div class="ui right item">
+                    <a href="/contact">Contact Us</a>
+                </div>
+
+                <div class="ui right item" style="margin-top:-5px;">
+                    <a href="https://instagram.com/famousandhigh">
+                        <i class="instagram icon"></i>
+                    </a>
+                    <a href="https://instagram.com/famousandhigh">
+                        <i class="twitter icon"></i>
+                    </a>
+                    <a href="https://instagram.com/famousandhigh">
+                        <i class="facebook icon"></i>
+                    </a>
+                </div>
+
+            </div>
     </div>
 
     <ul class="slideshow">
@@ -35,6 +80,10 @@
       <li></li>
       <li></li>
     </ul>
+
+    <script>
+        $('.ui.dropdown').dropdown();
+    </script>
 
 </body>
 

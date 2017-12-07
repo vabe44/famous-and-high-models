@@ -3,9 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <title>Famous & High Models</title>
+    <link rel="stylesheet" type="text/css" href="/css/semantic.min.css" />
     <link rel="stylesheet" type="text/css" href="/css/paper.min.css" />
-    <link rel="stylesheet" type="text/css" href="/css/style.css" />
     <link rel="stylesheet" type="text/css" href="/css/icon.min.css" />
+    <link rel="stylesheet" type="text/css" href="/css/style.css" />
+    <script type="text/javascript" src="/js/jquery-2.2.4.min.js"></script>
+    <script type="text/javascript" src="/js/semantic.min.js"></script>
 </head>
 
 <body>
@@ -28,6 +31,12 @@
             <input class="text" name="imagetitle" placeholder="Title of image (optional)" type="text" />
 
             <br>
+
+            <label for="imagetype">Type</label>
+            <select name="imagetype">
+                <option value="portfolio">Portfolio</option>
+                <option value="poloroid">Poloroid</option>
+            </select>
 
             <label for="modelId">Model</label>
             <select name="modelId">
@@ -52,6 +61,7 @@
                         <th>Model Name</th>
                         <th>Link</th>
                         <th>Title</th>
+                        <th>Type</th>
                         <th>Action</th>
                     </tr>
                 </thead>
@@ -64,6 +74,7 @@
                         <td><%= image.Model.get('fullName') %></td>
                         <td><%= image.link %></td>
                         <td><%= image.title %></td>
+                        <td><%= image.type %></td>
                         <td style="display:flex;justify-content:flex-end;">
                             <a href="/admin/images/<%= image.id %>/edit">
                                 <button>Edit</button>
@@ -80,6 +91,10 @@
         <% } %>
 
     </div>
+
+    <script>
+        $('.ui.dropdown').dropdown();
+    </script>
 
 </body>
 

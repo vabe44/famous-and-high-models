@@ -1,0 +1,122 @@
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Famous & High Models</title>
+    <link rel="stylesheet" type="text/css" href="/css/semantic.min.css" />
+    <link rel="stylesheet" type="text/css" href="/css/paper.min.css" />
+    <link rel="stylesheet" type="text/css" href="/css/icon.min.css" />
+    <link rel="stylesheet" type="text/css" href="/css/style.css" />
+    <script type="text/javascript" src="/js/jquery-2.2.4.min.js"></script>
+    <script type="text/javascript" src="/js/semantic.min.js"></script>
+
+    <style>
+        td.active {
+            font-weight: bold;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <% include ../../partials/header %>
+
+    <div id="container">
+
+        <div class="pagetitle">
+            <h1>Applicants</h1>
+        </div>
+
+        <p><strong>Available applicants:</strong></p>
+        <% if(applicants.length) { %>
+
+            <table class="ui celled structured table">
+                <thead>
+                    <tr>
+                        <th colspan="4" class="center aligned">Info</th>
+                        <th colspan="6" class="center aligned">Contact</th>
+                        <th colspan="8" class="center aligned">Body</th>
+                        <!-- <th rowspan="2">Message</th> -->
+                    </tr>
+                    <!-- <tr>
+                        <th>First Name</th>
+                        <th>Date of Birth</th>
+                        <th colspan="2">Email</th>
+                        <th>Phone</th>
+                        <th>Height</th>
+                        <th>Bust</th>
+                        <th>Waist</th>
+                        <th>Hips</th>
+                    </tr>
+                    <tr>
+                        <th>Last Name</th>
+                        <th>Gender</th>
+                        <th>Address</th>
+                        <th>City</th>
+                        <th>State</th>
+                        <th>Dress</th>
+                        <th>Shoe</th>
+                        <th>Hair</th>
+                        <th>Eyes</th>
+                    </tr> -->
+                </thead>
+
+                <tbody>
+                <% applicants.forEach(function(applicant){ %>
+
+                    <tr>
+                        <td class="active">First Name</td>
+                        <td><%= applicant.first_name %></td>
+                        <td class="active">Date of Birth</td>
+                        <td><%= applicant.dateofbirth %></td>
+                        <td class="active">Email</td>
+                        <td colspan="2"><%= applicant.email %></td>
+                        <td class="active">Phone</td>
+                        <td colspan="2"><%= applicant.phone %></td>
+                        <td class="active">Height</td>
+                        <td><%= applicant.height %></td>
+                        <td class="active">Bust</td>
+                        <td><%= applicant.bust %></td>
+                        <td class="active">Waist</td>
+                        <td><%= applicant.waist %></td>
+                        <td class="active">Hips</td>
+                        <td><%= applicant.hips %></td>
+                    </tr>
+                    <tr>
+                        <td class="active">Last Name</td>
+                        <td><%= applicant.last_name %></td>
+                        <td class="active">Gender</td>
+                        <td><%= applicant.gender %></td>
+                        <td class="active">Address</td>
+                        <td><%= applicant.address %></td>
+                        <td class="active">City</td>
+                        <td><%= applicant.city %></td>
+                        <td class="active">State</td>
+                        <td><%= applicant.state %></td>
+                        <td class="active">Dress</td>
+                        <td><%= applicant.dress %></td>
+                        <td class="active">Shoe</td>
+                        <td><%= applicant.shoe %></td>
+                        <td class="active">Hair</td>
+                        <td><%= applicant.hair %></td>
+                        <td class="active">Eyes</td>
+                        <td><%= applicant.eyes %></td>
+                    </tr>
+                <% }); %>
+                </tbody>
+            </table>
+
+        <% }  else { %>
+        No applicants added yet.
+        <% } %>
+
+    </div>
+
+    <script>
+        $('.ui.dropdown').dropdown();
+    </script>
+
+</body>
+
+</html>

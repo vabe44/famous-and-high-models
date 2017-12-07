@@ -1,0 +1,234 @@
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>About - Famous & High Models</title>
+    <link rel="stylesheet" type="text/css" href="/css/semantic.min.css" />
+    <link rel="stylesheet" type="text/css" href="/css/icon.min.css" />
+    <link rel="stylesheet" type="text/css" href="/css/style.css" />
+    <link rel="stylesheet" type="text/css" href="/css/slick.css" />
+    <script type="text/javascript" src="/js/jquery-2.2.4.min.js"></script>
+    <script type="text/javascript" src="/js/semantic.min.js"></script>
+    <script type="text/javascript" src="/js/slick.min.js"></script>
+    <style>
+        body {
+            height: unset;
+        }
+    </style>
+</head>
+
+<body>
+
+    <% include partials/header %>
+
+    <div id="container">
+
+        <p>TNG Models is always searching for new talent. Fresh Faces, Women, Men, Lifestyle & Runway Models can submit online for agency review.</p>
+        <p><strong>Call every Wednesday from 1pm – 3pm</strong></p>
+        <p><strong>We are currently looking for:</strong></p>
+
+        <div class="ui grid">
+            <div class="five wide column">
+                <strong>FRESH FACES</strong><br>
+                *No Modeling Experience Necessary<br>
+                Ages: 13 – 17<br>
+                Minimum Height Requirement for Girls: 5’7”<br>
+                Minimum Height Requirement for Boys: 5’10”
+            </div>
+            <div class="five wide column">
+                <strong>WOMENS DIVISION</strong><br>
+                Ages: 18 – 35<br>
+                Minimum Height: 5’8”<br>
+                Sizes: 0 – 6<br>
+                Plus Sizes: 10 – 18
+            </div>
+            <div class="five wide column">
+                <strong>MENS DIVISON</strong><br>
+                Ages: 18 – 35<br>
+                Minimum Height: 6’<br>
+                Sizes: 28 – 34
+            </div>
+            <div class="five wide column">
+                <strong>RUNWAY DIVISION</strong><br>
+                Ages: 16 – 25<br>
+                Minimum Height Requirement for Women: 5’9”<br>
+                Women Sizes: 0 – 4<br>
+                Minimum Height Requirement for Men: 6’1”<br>
+                Men Sizes: 28 – 34
+            </div>
+            <div class="five wide column">
+                <strong>PLUS SIZE WOMEN</strong><br>
+                Ages: 16-35<br>
+                Minimum Height Requirement for Women: 5’9”<br>
+                Women Sizes: 8 - 18
+            </div>
+            <div class="five wide column">
+                <strong>CLASSICS DIVISION</strong><br>
+                Ages: 45 - 65<br>
+                Minimum Height Requirement for Women: 5’6”<br>
+                Women Sizes: 2 – 10<br>
+                Minimum Height Requirement for Men: 5’10”<br>
+                Men Sizes: 32 – 38
+            </div>
+            <div class="five wide column">
+                <strong>KIDS</strong>
+                *No Modeling Experience Necessary<br>
+                Ages: 3-12
+            </div>
+        </div>
+
+        <br>
+        <p>
+            <strong>Please upload:</strong><br>
+            • Image 1: One close up photo of your face. Your face should be clean with NO MAKE UP.<br>
+            • Image 2: One full length photo (in a swimsuit or fitted clothing)<br>
+            • Image 3: One image of your choice<br>
+            *Please make one of these photos smiling so we can see your teeth.<br>
+            <br>
+            All photos should be natural and friendly, clear and in focus, of you alone, and without hats or sunglasses. Please do not spend any money on professional pictures if you do not already have them—we love to see clean phone or digital camera photos.<br>
+            <br>
+            If you have professional photos, you can submit those, but be sure that they are simple, natural and current.<br>
+            Please share any previous modeling experience you have, other agencies that you are currently signed with, and anything else you’d like us to know in the message field.
+        </p>
+
+        <p>
+            *Online applications acceptance ONLY -<em>&nbsp;Please no walk-ins&nbsp;</em>
+        </p>
+
+        <form class="ui form" method="post" action="/join">
+            <div class="two fields">
+                <div class="field">
+                    <label>First Name</label>
+                    <input type="text" name="firstname" required placeholder="First Name">
+                </div>
+                <div class="field">
+                    <label>Last Name</label>
+                    <input type="text" name="lastname" required placeholder="Last Name">
+                </div>
+            </div>
+
+            <div class="two fields">
+                <div class="field">
+                    <label>Email</label>
+                    <input type="email" name="email" required placeholder="Email address">
+                </div>
+                <div class="field">
+                    <label>Phone</label>
+                    <input type="text" name="phone" required placeholder="Phone">
+                </div>
+            </div>
+
+            <div class="two fields">
+                <div class="field">
+                    <label>Address</label>
+                    <input type="text" name="address" required placeholder="Address">
+                </div>
+                <div class="field">
+                    <label>City</label>
+                    <input type="text" name="city" required placeholder="City">
+                </div>
+            </div>
+
+            <div class="two fields">
+                <div class="field">
+                    <label>State</label>
+                    <input type="text" name="state" required placeholder="State">
+                </div>
+                <div class="field">
+                    <label>Date of Birth</label>
+                    <input type="date" name="dateofbirth" required placeholder="Date of Birth">
+                </div>
+            </div>
+
+            <div class="field">
+                <label>Message</label>
+                <textarea name="message" rows="2"></textarea>
+            </div>
+
+            <div class="grouped fields">
+                <label for="gender">Select your gender:</label>
+                <div class="field">
+                    <div class="ui radio checkbox">
+                        <input type="radio" name="gender" value="female" required checked="" tabindex="0" class="hidden">
+                        <label>Female</label>
+                    </div>
+                </div>
+                <div class="field">
+                    <div class="ui radio checkbox">
+                        <input type="radio" name="gender" value="male" required tabindex="0" class="hidden">
+                        <label>Male</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="four fields">
+                <div class="field">
+                    <label>Height</label>
+                    <div class="ui input corner labeled">
+                        <input name="height" type="number" step="1" required placeholder="Height">
+                        <div class="ui basic label">
+                            cm
+                        </div>
+                    </div>
+                </div>
+                <div class="field">
+                    <label>Waist</label>
+                    <input name="waist" type="number" step="0.1" required placeholder="Waist">
+                </div>
+                <div class="field">
+                    <label>Bust</label>
+                    <input type="text" name="bust" required placeholder="Bust">
+                </div>
+                <div class="field">
+                    <label>Hips</label>
+                    <input name="hips" type="number" step="0.1" required placeholder="Hips">
+                </div>
+            </div>
+
+            <div class="four fields">
+                <div class="field">
+                    <label>Dress Size</label>
+                    <input type="text" name="dress" required placeholder="Dress Size">
+                </div>
+                <div class="field">
+                    <label>Shoe Size</label>
+                    <input type="text" name="shoe" required placeholder="Shoe Size">
+                </div>
+                <div class="field">
+                    <label>Hair Color</label>
+                    <input type="text" name="hair" required placeholder="Hair Color">
+                </div>
+                <div class="field">
+                    <label>Eye Color</label>
+                    <input type="text" name="eyes" required placeholder="Eye Color">
+                </div>
+            </div>
+
+            <div class="three fields">
+                <div class="field">
+                    <label>Image 1</label>
+                    <input type="text" name="image1" required placeholder="Link to image (eg. on imgur)">
+                </div>
+                <div class="field">
+                    <label>Image 2</label>
+                    <input type="text" name="image2" required placeholder="Link to image (eg. on imgur)">
+                </div>
+                <div class="field">
+                    <label>Image 3</label>
+                    <input type="text" name="image3" required placeholder="Link to image (eg. on imgur)">
+                </div>
+            </div>
+
+            <button class="huge fluid green ui button" type="submit">Submit</button>
+        </form>
+
+    </div>
+
+    <script>
+        $('.ui.dropdown').dropdown();
+        $('.ui.radio.checkbox').checkbox();
+    </script>
+
+</body>
+
+</html>

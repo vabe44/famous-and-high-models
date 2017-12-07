@@ -3,21 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <title><%= model.get('fullName') %> - Famous and High Models</title>
-    <link rel="stylesheet" type="text/css" href="/css/paper.min.css" />
+    <link rel="stylesheet" type="text/css" href="/css/semantic.min.css" />
+    <!-- <link rel="stylesheet" type="text/css" href="/css/paper.min.css" /> -->
     <link rel="stylesheet" type="text/css" href="/css/icon.min.css" />
     <link rel="stylesheet" type="text/css" href="/css/style.css" />
+    <link rel="stylesheet" type="text/css" href="/css/slick.css" />
+    <script type="text/javascript" src="/js/jquery-2.2.4.min.js"></script>
+    <script type="text/javascript" src="/js/semantic.min.js"></script>
+    <script type="text/javascript" src="/js/slick.min.js"></script>
 </head>
 
 <body>
 
     <% include ../partials/header %>
 
-    <div id="modelcontainer">
-
-        <div class="modeldetails">
+    <div class="modeldetails">
             <div class="spacer"></div>
             <div class="name">
-                <div class="favorite spacer"></div>
+                <div class="favorite spacer">
+                    <div class="ui buttons">
+                        <button id="portfolio-button" class="mini ui red basic button">Portfolio</button>
+                        <button id="poloroid-button" class="mini ui red basic button">Poloroid</button>
+                        <button id="all-button" class="mini ui red toggle button">All</button>
+                    </div>
+                </div>
                 <h2>
                     <%= model.get('fullName') %>
                 </h2>
@@ -27,56 +36,56 @@
 
                 <div class="detail">
                     <strong>HEIGHT: </strong>
-                    <span class="badge success">
+                    <span>
                         <%= model.height %>
                     </span>
                 </div>
 
                 <div class="detail">
                     <strong>BUST: </strong>
-                    <span class="badge success">
+                    <span>
                         <%= model.bust %>
                     </span>
                 </div>
 
                 <div class="detail">
                     <strong>WAIST: </strong>
-                    <span class="badge success">
+                    <span>
                         <%= model.waist %>
                     </span>
                 </div>
 
                 <div class="detail">
                     <strong>HIPS: </strong>
-                    <span class="badge success">
+                    <span>
                         <%= model.hips %>
                     </span>
                 </div>
 
                 <div class="detail">
                     <strong>DRESS: </strong>
-                    <span class="badge success">
+                    <span>
                         <%= model.dress %>
                     </span>
                 </div>
 
                 <div class="detail">
                     <strong>SHOE: </strong>
-                    <span class="badge success">
+                    <span>
                         <%= model.shoe %>
                     </span>
                 </div>
 
                 <div class="detail">
                     <strong>HAIR: </strong>
-                    <span class="badge success">
+                    <span>
                         <%= model.hair %>
                     </span>
                 </div>
 
                 <div class="detail">
                     <strong>EYES: </strong>
-                    <span class="badge success">
+                    <span>
                         <%= model.eyes %>
                     </span>
                 </div>
@@ -84,72 +93,168 @@
             </div>
         </div>
 
-        <div id="model-image-gallery">
+    <div class="newmodel">
+        <section class="variable-width slider">
             <% model.Images.forEach(image => { %>
-
-                <div class="galleryimage">
-                    <img src="<%= image.link %>" alt="<%= image.title %>">
-                </div>
-
+                <img src="<%= image.link %>" class="<% if(image.type === 'portfolio') { %> portfolio <% } else {  %> poloroid <% } %>">
             <% }); %>
-        </div>
-
+        </section>
     </div>
 
-<script>
-    function addToFavorites(sender) {
-        var model = {
-            id: sender.dataset.id,
-            name: sender.dataset.name,
-            image: sender.dataset.image,
-        };
-
-        if(localStorage.getItem('favorites')) {
-            var favorites = JSON.parse(localStorage.getItem('favorites'));
-            favorites.push(model);
-            localStorage.setItem('favorites', JSON.stringify(favorites));
-        } else {
-            var favorites = [];
-            favorites.push(model);
-            localStorage.setItem('favorites', JSON.stringify(favorites));
-        }
-        sender.setAttribute('onclick', 'removeFromFavorites(this)');
-        sender.classList.remove("empty");
-    }
-</script>
+    <script>
+        $('.ui.dropdown').dropdown();
+    </script>
 
 <script>
-    function removeFromFavorites(sender) {
-        if(localStorage.getItem('favorites')) {
-            var favorites = JSON.parse(localStorage.getItem('favorites'));
-            for(var i = 0; i < favorites.length; i++) {
-                if (favorites[i].id == sender.dataset.id) {
-                    favorites.splice(i, 1);
-                    localStorage.setItem('favorites', JSON.stringify(favorites));
-                    break;
-                }
+        function addToFavorites(sender) {
+            var model = {
+                id: sender.dataset.id,
+                name: sender.dataset.name,
+                image: sender.dataset.image,
+            };
+
+            if(localStorage.getItem('favorites')) {
+                var favorites = JSON.parse(localStorage.getItem('favorites'));
+                favorites.push(model);
+                localStorage.setItem('favorites', JSON.stringify(favorites));
+            } else {
+                var favorites = [];
+                favorites.push(model);
+                localStorage.setItem('favorites', JSON.stringify(favorites));
             }
+            sender.setAttribute('onclick', 'removeFromFavorites(this)');
+            sender.classList.remove("empty");
         }
-        sender.setAttribute('onclick', 'addToFavorites(this)');
-        sender.classList.add("empty");
-    }
-</script>
+    </script>
 
-<script>
-        window.onload = checkFavorite;
-        function checkFavorite() {
-            if (localStorage.getItem("favorites")) {
-                var favoriteElement = document.getElementsByClassName('favorite empty star icon')[0];
+    <script>
+        function removeFromFavorites(sender) {
+            if(localStorage.getItem('favorites')) {
                 var favorites = JSON.parse(localStorage.getItem('favorites'));
                 for(var i = 0; i < favorites.length; i++) {
-                    if (favorites[i].id == favoriteElement.dataset.id) {
-                        favoriteElement.setAttribute('onclick', 'removeFromFavorites(this)');
-                        favoriteElement.classList.remove("empty");
+                    if (favorites[i].id == sender.dataset.id) {
+                        favorites.splice(i, 1);
+                        localStorage.setItem('favorites', JSON.stringify(favorites));
+                        break;
                     }
                 }
             }
-        };
-</script>
+            sender.setAttribute('onclick', 'addToFavorites(this)');
+            sender.classList.add("empty");
+        }
+    </script>
+
+    <script>
+            window.onload = checkFavorite;
+            function checkFavorite() {
+                if (localStorage.getItem("favorites")) {
+                    var favoriteElement = document.getElementsByClassName('favorite empty star icon')[0];
+                    var favorites = JSON.parse(localStorage.getItem('favorites'));
+                    for(var i = 0; i < favorites.length; i++) {
+                        if (favorites[i].id == favoriteElement.dataset.id) {
+                            favoriteElement.setAttribute('onclick', 'removeFromFavorites(this)');
+                            favoriteElement.classList.remove("empty");
+                        }
+                    }
+                }
+            };
+    </script>
+
+    <script type="text/javascript">
+        $(document).ready(function(){
+            'use strict';
+
+            var $slider = $(".variable-width");
+            $slider.on('init', function () {
+                mouseWheel($slider);
+            }).slick({
+                dots: false,
+                arrows: false,
+                slidesToShow: 1,
+                slidesToScroll: 1,
+                autoplay: true,
+                autoplaySpeed: 5000,
+                centerMode: true,
+                variableWidth: true,
+                adaptiveHeight: true,
+                infinite: true,
+                draggable: false,
+            });
+            function mouseWheel($slider) {
+                $(window).on('wheel', { $slider: $slider }, mouseWheelHandler);
+            }
+            function mouseWheelHandler(event) {
+                event.preventDefault();
+                var $slider = event.data.$slider;
+                var delta = event.originalEvent.deltaY;
+                if (delta > 0) {
+                    $slider.slick('slickPrev');
+                } else {
+                    $slider.slick('slickNext');
+                }
+            }
+        });
+
+        var filtered = false;
+
+        $('#portfolio-button').on('click', function(){
+            if(!filtered) {
+                document.getElementById("portfolio-button").classList.add("toggle");
+                document.getElementById("portfolio-button").classList.remove("basic");
+                document.getElementById("all-button").classList.remove("toggle");
+                document.getElementById("all-button").classList.add("basic");
+                document.getElementById("poloroid-button").classList.remove("toggle");
+                document.getElementById("poloroid-button").classList.add("basic");
+                $('.variable-width').slick('slickFilter','.portfolio');
+                filtered = true;
+            } else {
+                document.getElementById("portfolio-button").classList.add("toggle");
+                document.getElementById("portfolio-button").classList.remove("basic");
+                document.getElementById("all-button").classList.remove("toggle");
+                document.getElementById("all-button").classList.add("basic");
+                document.getElementById("poloroid-button").classList.remove("toggle");
+                document.getElementById("poloroid-button").classList.add("basic");
+                $('.variable-width').slick('slickUnfilter');
+                $('.variable-width').slick('slickFilter','.portfolio');
+                filtered = true;
+            }
+        });
+
+        $('#poloroid-button').on('click', function(){
+            if(!filtered) {
+                document.getElementById("poloroid-button").classList.add("toggle");
+                document.getElementById("poloroid-button").classList.remove("basic");
+                document.getElementById("all-button").classList.remove("toggle");
+                document.getElementById("all-button").classList.add("basic");
+                document.getElementById("portfolio-button").classList.remove("toggle");
+                document.getElementById("portfolio-button").classList.add("basic");
+                $('.variable-width').slick('slickFilter','.poloroid');
+                filtered = true;
+            } else {
+                document.getElementById("poloroid-button").classList.add("toggle");
+                document.getElementById("poloroid-button").classList.remove("basic");
+                document.getElementById("all-button").classList.remove("toggle");
+                document.getElementById("all-button").classList.add("basic");
+                document.getElementById("portfolio-button").classList.remove("toggle");
+                document.getElementById("portfolio-button").classList.add("basic");
+                $('.variable-width').slick('slickUnfilter');
+                $('.variable-width').slick('slickFilter','.poloroid');
+                filtered = true;
+            }
+        });
+
+        $('#all-button').on('click', function(){
+            document.getElementById("poloroid-button").classList.remove("toggle");
+            document.getElementById("portfolio-button").classList.remove("toggle");
+            document.getElementById("poloroid-button").classList.add("basic");
+            document.getElementById("portfolio-button").classList.add("basic");
+            document.getElementById("all-button").classList.add("toggle");
+            document.getElementById("all-button").classList.remove("basic");
+            $('.variable-width').slick('slickUnfilter');
+            filtered = false;
+        });
+
+    </script>
 
 </body>
 

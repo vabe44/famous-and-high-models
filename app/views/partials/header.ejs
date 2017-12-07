@@ -4,13 +4,64 @@
         <h1>F&H Models</h1>
     </a>
     <div class="menu">
-            <a href="/admin" class="paper-btn" <%= currentUser ? '' : 'hidden' %>>Admin</a>
-            <a href="/models" class="paper-btn" >Models</a>
-            <a href="/favorites" class="paper-btn" >Favorites</a>
-            <a href="#" class="paper-btn">Join</a>
-            <a href="/aboutus" class="paper-btn">About Us</a>
-            <a href="https://instagram.com/famousandhigh" class="paper-btn">
-                <i class="instagram icon"></i>
-            </a>
+            <!-- <a href="/admin" class="paper-btn" <%= currentUser ? '' : 'hidden' %>>Admin</a> -->
+            <div class="ui text menu">
+
+                <div class="ui right dropdown item">
+                    Models
+                    <i class="dropdown icon"></i>
+                    <div class="menu">
+                        <div class="item"><a href="/women">Women</a></div>
+                        <div class="item"><a href="/men">Men</a></div>
+                        <div class="item"><a href="/event-popups">Event + Popups</a></div>
+                        <div class="item"><a href="/products">Products</a></div>
+                    </div>
+                </div>
+
+                <div class="ui right item">
+                    <a href="/about">About Us</a>
+                </div>
+
+                <div class="ui right item">
+                    <a href="/join">Join</a>
+                </div>
+
+                <div class="ui right item">
+                    <a href="/favorites">Favorites</a>
+                </div>
+
+                <div class="ui right item">
+                    <a href="/contact">Contact Us</a>
+                </div>
+
+                <div class="ui right item" style="margin-top:-5px;">
+                    <a href="https://instagram.com/famousandhigh">
+                        <i class="instagram icon"></i>
+                    </a>
+                    <a href="https://instagram.com/famousandhigh">
+                        <i class="twitter icon"></i>
+                    </a>
+                    <a href="https://instagram.com/famousandhigh">
+                        <i class="facebook icon"></i>
+                    </a>
+                </div>
+
+            </div>
+
     </div>
+</div>
+
+<div class="flash container">
+    <% if(error && error.length > 0){ %>
+        <div class="ui negative message">
+            <i class="close icon"></i>
+            <p><%= error %></p>
+        </div>
+    <% } %>
+    <% if(success && success.length > 0){ %>
+        <div class="ui success message">
+            <i class="close icon"></i>
+            <p><%= success %></p>
+        </div>
+    <% } %>
 </div>

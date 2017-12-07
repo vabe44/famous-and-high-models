@@ -6,6 +6,7 @@ var session         = require('express-session');
 var bodyParser      = require('body-parser');
 var methodOverride  = require("method-override");
 var env             = require('dotenv').load();
+var flash           = require('express-flash');
 
 //For BodyParser
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -19,8 +20,11 @@ app.use(passport.session()); // persistent login sessions
 
 //For Views
 app.set('view engine', 'ejs');
-app.set('views', './app/views')
+app.set('views', './app/views');
 app.use(express.static(path.join(__dirname, '/app/public')));
+
+// For Flash Messages
+app.use(flash());
 
 // Models
 var models = require("./app/models");
@@ -38,6 +42,8 @@ models.sequelize.sync().then(function () {
 // Current User Local
 app.use(function (req, res, next) {
     res.locals.currentUser = req.user;
+    res.locals.error = req.flash("error");
+    res.locals.success = req.flash("success");
     next();
 });
 

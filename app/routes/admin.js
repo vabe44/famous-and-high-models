@@ -136,6 +136,7 @@ router.post('/images/new', mw.isLoggedIn, mw.asyncMiddleware(async (req, res, ne
     await m.Image.create({
         link: req.body.imagelink,
         title: req.body.imagetitle,
+        type: req.body.imagetype,
         model_id: req.body.modelId || null,
     });
     res.redirect('back');
@@ -158,6 +159,7 @@ router.put("/images/:id", mw.isLoggedIn, mw.asyncMiddleware(async (req, res, nex
     await image.update({
         link: req.body.imagelink,
         title: req.body.imagetitle,
+        type: req.body.imagetype,
         model_id: req.body.modelId || null,
     });
     res.redirect('/admin/images');
@@ -170,6 +172,14 @@ router.delete('/images/:id', mw.isLoggedIn, mw.asyncMiddleware(async (req, res, 
     const image = await m.Image.findById(req.params.id);
     await image.destroy();
     res.redirect('/admin/images');
+
+}));
+
+/* GET images page. */
+router.get('/applicants', mw.isLoggedIn, mw.asyncMiddleware(async (req, res, next) => {
+
+    const applicants = await m.Applicant.findAll()
+    res.render('admin/applicants/index', { applicants });
 
 }));
 

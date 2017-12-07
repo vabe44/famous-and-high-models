@@ -22,6 +22,7 @@
     "dotenv": "^4.0.0",
     "ejs": "~2.5.7",
     "express": "~4.15.5",
+    "express-flash": "0.0.2",
     "express-session": "^1.15.0",
     "method-override": "^2.3.10",
     "mysql": "^2.15.0",
