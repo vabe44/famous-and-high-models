@@ -19,6 +19,8 @@
 
         <div id="modelsgrid">
 
+                <p id="nofavorites">You have not selected any favorites</p>
+
                 <div class="modelbox" hidden>
                     <a href="">
                         <div class="modelimage">
@@ -39,6 +41,7 @@
             window.onload = checkFavorites;
             function checkFavorites() {
                 if (localStorage.getItem("favorites")) {
+                    document.getElementById("nofavorites").hidden = true;
                     var favorites = JSON.parse(localStorage.getItem('favorites'));
                     var modelsgrid = document.getElementById('modelsgrid');
                     favorites.forEach(model => {
