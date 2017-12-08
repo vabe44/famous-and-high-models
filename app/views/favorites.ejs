@@ -41,10 +41,10 @@
             window.onload = checkFavorites;
             function checkFavorites() {
                 if (localStorage.getItem("favorites")) {
-                    document.getElementById("nofavorites").hidden = true;
                     var favorites = JSON.parse(localStorage.getItem('favorites'));
                     var modelsgrid = document.getElementById('modelsgrid');
                     favorites.forEach(model => {
+                        document.getElementById("nofavorites").hidden = true;
                         var node = document.getElementsByClassName('modelbox')[0];
                         var dupNode = node.cloneNode(true);
                         dupNode.getElementsByTagName('a')[0].setAttribute('href', '/models/'+model.id);
