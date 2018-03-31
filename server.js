@@ -74,7 +74,7 @@ app.use(function (err, req, res, next) {
     res.render('error');
 });
 
-app.listen(5000, function(err){
+app.listen(process.env.PORT, function(err){
     if(!err)
     console.log("Site is live"); else console.log(err)
 });
